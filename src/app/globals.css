@@ -1,0 +1,314 @@
+@import "tailwindcss";
+
+/* ============================================
+   NEXA AI — Design System
+   ============================================ */
+
+/* --- Light Mode (Default) --- */
+:root {
+  --background: 40 20% 99%;
+  --foreground: 240 10% 12%;
+  --card: 40 15% 98%;
+  --card-foreground: 240 10% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 12%;
+  --primary: 258 60% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 5% 94%;
+  --secondary-foreground: 240 10% 20%;
+  --muted: 240 5% 96%;
+  --muted-foreground: 240 4% 46%;
+  --accent: 258 50% 95%;
+  --accent-foreground: 258 60% 45%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 6% 90%;
+  --input: 240 6% 90%;
+  --ring: 258 60% 55%;
+  --radius: 0.625rem;
+
+  /* Nexa-specific tokens */
+  --nexa-violet: 258 60% 55%;
+  --nexa-indigo: 234 62% 53%;
+  --nexa-cyan: 187 72% 50%;
+  --nexa-surface-1: 40 15% 98%;
+  --nexa-surface-2: 40 10% 96%;
+  --nexa-surface-3: 240 5% 93%;
+  --nexa-text-primary: 240 10% 12%;
+  --nexa-text-secondary: 240 4% 46%;
+  --nexa-text-tertiary: 240 4% 62%;
+  --nexa-sidebar-bg: 240 6% 97%;
+  --nexa-sidebar-border: 240 6% 91%;
+  --nexa-sidebar-hover: 258 50% 96%;
+
+  /* Chart colors */
+  --chart-1: 258 60% 55%;
+  --chart-2: 187 72% 50%;
+  --chart-3: 234 62% 53%;
+  --chart-4: 330 65% 55%;
+  --chart-5: 142 55% 45%;
+}
+
+/* --- Dark Mode --- */
+.dark {
+  --background: 240 10% 7%;
+  --foreground: 0 0% 93%;
+  --card: 240 8% 10%;
+  --card-foreground: 0 0% 93%;
+  --popover: 240 8% 10%;
+  --popover-foreground: 0 0% 93%;
+  --primary: 258 60% 62%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 6% 16%;
+  --secondary-foreground: 0 0% 85%;
+  --muted: 240 6% 14%;
+  --muted-foreground: 240 4% 55%;
+  --accent: 258 40% 18%;
+  --accent-foreground: 258 60% 72%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 6% 18%;
+  --input: 240 6% 18%;
+  --ring: 258 60% 62%;
+
+  --nexa-violet: 258 60% 62%;
+  --nexa-indigo: 234 55% 62%;
+  --nexa-cyan: 187 65% 55%;
+  --nexa-surface-1: 240 8% 10%;
+  --nexa-surface-2: 240 7% 13%;
+  --nexa-surface-3: 240 6% 16%;
+  --nexa-text-primary: 0 0% 93%;
+  --nexa-text-secondary: 240 4% 55%;
+  --nexa-text-tertiary: 240 4% 40%;
+  --nexa-sidebar-bg: 240 8% 8%;
+  --nexa-sidebar-border: 240 6% 15%;
+  --nexa-sidebar-hover: 258 30% 14%;
+
+  --chart-1: 258 60% 62%;
+  --chart-2: 187 65% 55%;
+  --chart-3: 234 55% 62%;
+  --chart-4: 330 60% 60%;
+  --chart-5: 142 50% 50%;
+}
+
+/* --- Tailwind Theme Inline --- */
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-nexa-violet: hsl(var(--nexa-violet));
+  --color-nexa-indigo: hsl(var(--nexa-indigo));
+  --color-nexa-cyan: hsl(var(--nexa-cyan));
+  --color-sidebar-bg: hsl(var(--nexa-sidebar-bg));
+  --color-sidebar-border: hsl(var(--nexa-sidebar-border));
+  --color-sidebar-hover: hsl(var(--nexa-sidebar-hover));
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-slide-in: slide-in 0.25s ease-out;
+  --animate-slide-up: slide-up 0.3s ease-out;
+  --animate-scale-in: scale-in 0.2s ease-out;
+  --animate-pulse-soft: pulse-soft 2s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-typing: typing 1.2s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateX(-8px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes typing {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+}
+
+/* --- Base Styles --- */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.35);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.15);
+}
+
+/* --- Selection --- */
+::selection {
+  background: hsl(var(--nexa-violet) / 0.2);
+  color: hsl(var(--foreground));
+}
+
+/* --- Focus Ring --- */
+.focus-ring {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* --- Prose Styles for AI Responses --- */
+.nexa-prose {
+  line-height: 1.7;
+  font-size: 0.9375rem;
+}
+
+.nexa-prose h1 { font-size: 1.5rem; font-weight: 650; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+.nexa-prose h2 { font-size: 1.25rem; font-weight: 625; margin-top: 1.25rem; margin-bottom: 0.625rem; }
+.nexa-prose h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; }
+.nexa-prose p { margin-bottom: 0.75rem; }
+.nexa-prose ul, .nexa-prose ol { margin-bottom: 0.75rem; padding-left: 1.5rem; }
+.nexa-prose li { margin-bottom: 0.25rem; }
+.nexa-prose blockquote {
+  border-left: 3px solid hsl(var(--nexa-violet) / 0.4);
+  padding-left: 1rem;
+  margin: 0.75rem 0;
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+}
+.nexa-prose a {
+  color: hsl(var(--nexa-violet));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.nexa-prose code:not(pre code) {
+  background: hsl(var(--muted));
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-family: var(--font-mono);
+}
+.nexa-prose pre {
+  background: hsl(var(--nexa-surface-2));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 0.75rem 0;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.dark .nexa-prose pre {
+  background: hsl(240 8% 12%);
+}
+.nexa-prose pre code {
+  font-family: var(--font-mono);
+  background: none;
+  padding: 0;
+}
+.nexa-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.875rem;
+}
+.nexa-prose th, .nexa-prose td {
+  border: 1px solid hsl(var(--border));
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.nexa-prose th {
+  background: hsl(var(--muted));
+  font-weight: 600;
+}
+.nexa-prose hr {
+  border: none;
+  border-top: 1px solid hsl(var(--border));
+  margin: 1.5rem 0;
+}
+.nexa-prose img {
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+
+/* --- Shimmer Loading Effect --- */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 25%,
+    hsl(var(--muted-foreground) / 0.08) 50%,
+    hsl(var(--muted)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* --- Glass Effect (subtle, not excessive) --- */
+.nexa-glass {
+  background: hsl(var(--background) / 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Monaco Editor overrides */
+.monaco-editor {
+  border-radius: var(--radius) !important;
+}

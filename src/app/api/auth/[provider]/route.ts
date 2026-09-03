@@ -4,11 +4,13 @@ import { cookies } from 'next/headers';
 const PROVIDERS = {
   google: {
     clientId: 'GOOGLE_CLIENT_ID',
+    clientSecret: 'GOOGLE_CLIENT_SECRET',
     authorize: 'https://accounts.google.com/o/oauth2/v2/auth',
     scope: 'openid email profile',
   },
   github: {
     clientId: 'GITHUB_CLIENT_ID',
+    clientSecret: 'GITHUB_CLIENT_SECRET',
     authorize: 'https://github.com/login/oauth/authorize',
     scope: 'read:user user:email',
   },
@@ -20,8 +22,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ prov
   if (!config) return Response.json({ error: 'Unsupported OAuth provider.' }, { status: 400 });
 
   const clientId = process.env[config.clientId];
-  if (!clientId) {
-    return Response.json({ error: `${provider} OAuth is not configured. Add ${config.clientId} to .env.local.` }, { status: 503 });
+  const clientSecret = process.env[config.clientSecret];
+  if (!clientId || !clientSecret) {
+    const missing = !clientId ? config.clientId : config.clientSecret;
+    return Response.json({ error: `${provider} OAuth is not configured. Add ${missing} to .env.local.` }, { status: 503 });
   }
 
   const origin = new URL(request.url).origin;

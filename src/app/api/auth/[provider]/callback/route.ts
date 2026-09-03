@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 
 export async function GET(request: Request, { params }: { params: Promise<{ provider: string }> }) {
   const { provider } = await params;
+  if (provider !== 'google' && provider !== 'github') redirect('/login?error=Unsupported%20OAuth%20provider');
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
@@ -36,6 +37,6 @@ export async function GET(request: Request, { params }: { params: Promise<{ prov
   }
 
   if (!profile) redirect('/login?error=Could%20not%20complete%20OAuth%20sign-in');
-  const encoded = Buffer.from(JSON.stringify(profile), 'utf8').toString('base64url');
+  const encoded = Buffer.from(JSON.stringify({ ...profile, provider }), 'utf8').toString('base64url');
   redirect(`/auth/callback?user=${encoded}`);
 }

@@ -16,9 +16,10 @@ export default function AuthCallbackPage() {
       const encoded = new URLSearchParams(window.location.search).get('user');
       if (!encoded) throw new Error('No account information was returned.');
       const normalized = encoded.replace(/-/g, '+').replace(/_/g, '/');
-      const profile = JSON.parse(atob(normalized)) as { name?: string; email?: string };
+      const profile = JSON.parse(atob(normalized)) as { name?: string; email?: string; provider?: 'google' | 'github' };
       if (!profile.email) throw new Error('The provider did not return an email address.');
-      const user = signInWithOAuthProfile(profile.name ?? '', profile.email);
+      if (!profile.provider) throw new Error('The provider did not return an account type.');
+      const user = signInWithOAuthProfile(profile.name ?? '', profile.email, profile.provider);
       setUser(user);
       router.replace('/app');
     } catch (callbackError) {

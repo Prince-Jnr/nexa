@@ -6,7 +6,7 @@ const CURRENT_USER_KEY = 'nexa-current-user';
 interface StoredAccount {
   user: User;
   passwordHash?: string;
-  provider: 'email' | 'google';
+  provider: 'email' | 'google' | 'github';
 }
 
 function readAccounts(): StoredAccount[] {
@@ -85,14 +85,14 @@ export function signInWithGoogleEmail(email: string): User {
   return saveCurrentUser(user);
 }
 
-export function signInWithOAuthProfile(name: string, email: string): User {
+export function signInWithOAuthProfile(name: string, email: string, provider: 'google' | 'github'): User {
   const normalizedEmail = email.trim().toLowerCase();
   const accounts = readAccounts();
   const existing = accounts.find((account) => account.user.email === normalizedEmail);
   if (existing) return saveCurrentUser(existing.user);
 
   const user = createUser(name.trim() || normalizedEmail.split('@')[0], normalizedEmail);
-  accounts.push({ user, provider: 'google' });
+  accounts.push({ user, provider });
   writeAccounts(accounts);
   return saveCurrentUser(user);
 }

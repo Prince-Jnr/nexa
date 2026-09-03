@@ -85,6 +85,18 @@ export function signInWithGoogleEmail(email: string): User {
   return saveCurrentUser(user);
 }
 
+export function signInWithOAuthProfile(name: string, email: string): User {
+  const normalizedEmail = email.trim().toLowerCase();
+  const accounts = readAccounts();
+  const existing = accounts.find((account) => account.user.email === normalizedEmail);
+  if (existing) return saveCurrentUser(existing.user);
+
+  const user = createUser(name.trim() || normalizedEmail.split('@')[0], normalizedEmail);
+  accounts.push({ user, provider: 'google' });
+  writeAccounts(accounts);
+  return saveCurrentUser(user);
+}
+
 export function getCurrentUser(): User | null {
   if (typeof window === 'undefined') return null;
   try {

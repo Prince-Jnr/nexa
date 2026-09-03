@@ -12,25 +12,25 @@
   --card-foreground: 240 10% 12%;
   --popover: 0 0% 100%;
   --popover-foreground: 240 10% 12%;
-  --primary: 258 60% 55%;
+  --primary: 0 0% 12%;
   --primary-foreground: 0 0% 100%;
   --secondary: 240 5% 94%;
   --secondary-foreground: 240 10% 20%;
   --muted: 240 5% 96%;
   --muted-foreground: 240 4% 46%;
-  --accent: 258 50% 95%;
-  --accent-foreground: 258 60% 45%;
+  --accent: 0 0% 93%;
+  --accent-foreground: 0 0% 12%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 100%;
   --border: 240 6% 90%;
   --input: 240 6% 90%;
-  --ring: 258 60% 55%;
+  --ring: 0 0% 30%;
   --radius: 0.625rem;
 
   /* Nexa-specific tokens */
-  --nexa-violet: 258 60% 55%;
-  --nexa-indigo: 234 62% 53%;
-  --nexa-cyan: 187 72% 50%;
+  --nexa-violet: 0 0% 12%;
+  --nexa-indigo: 0 0% 32%;
+  --nexa-cyan: 0 0% 42%;
   --nexa-surface-1: 40 15% 98%;
   --nexa-surface-2: 40 10% 96%;
   --nexa-surface-3: 240 5% 93%;
@@ -39,14 +39,14 @@
   --nexa-text-tertiary: 240 4% 62%;
   --nexa-sidebar-bg: 240 6% 97%;
   --nexa-sidebar-border: 240 6% 91%;
-  --nexa-sidebar-hover: 258 50% 96%;
+  --nexa-sidebar-hover: 0 0% 93%;
 
   /* Chart colors */
-  --chart-1: 258 60% 55%;
-  --chart-2: 187 72% 50%;
-  --chart-3: 234 62% 53%;
-  --chart-4: 330 65% 55%;
-  --chart-5: 142 55% 45%;
+  --chart-1: 0 0% 12%;
+  --chart-2: 0 0% 35%;
+  --chart-3: 0 0% 52%;
+  --chart-4: 0 0% 68%;
+  --chart-5: 0 0% 82%;
 }
 
 /* --- Dark Mode --- */
@@ -57,23 +57,23 @@
   --card-foreground: 0 0% 93%;
   --popover: 240 8% 10%;
   --popover-foreground: 0 0% 93%;
-  --primary: 258 60% 62%;
+  --primary: 0 0% 92%;
   --primary-foreground: 0 0% 100%;
   --secondary: 240 6% 16%;
   --secondary-foreground: 0 0% 85%;
   --muted: 240 6% 14%;
   --muted-foreground: 240 4% 55%;
-  --accent: 258 40% 18%;
-  --accent-foreground: 258 60% 72%;
+  --accent: 0 0% 18%;
+  --accent-foreground: 0 0% 94%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 100%;
   --border: 240 6% 18%;
   --input: 240 6% 18%;
-  --ring: 258 60% 62%;
+  --ring: 0 0% 78%;
 
-  --nexa-violet: 258 60% 62%;
-  --nexa-indigo: 234 55% 62%;
-  --nexa-cyan: 187 65% 55%;
+  --nexa-violet: 0 0% 92%;
+  --nexa-indigo: 0 0% 70%;
+  --nexa-cyan: 0 0% 62%;
   --nexa-surface-1: 240 8% 10%;
   --nexa-surface-2: 240 7% 13%;
   --nexa-surface-3: 240 6% 16%;
@@ -82,13 +82,13 @@
   --nexa-text-tertiary: 240 4% 40%;
   --nexa-sidebar-bg: 240 8% 8%;
   --nexa-sidebar-border: 240 6% 15%;
-  --nexa-sidebar-hover: 258 30% 14%;
+  --nexa-sidebar-hover: 0 0% 15%;
 
-  --chart-1: 258 60% 62%;
-  --chart-2: 187 65% 55%;
-  --chart-3: 234 55% 62%;
-  --chart-4: 330 60% 60%;
-  --chart-5: 142 50% 50%;
+  --chart-1: 0 0% 92%;
+  --chart-2: 0 0% 76%;
+  --chart-3: 0 0% 60%;
+  --chart-4: 0 0% 45%;
+  --chart-5: 0 0% 30%;
 }
 
 /* --- Tailwind Theme Inline --- */

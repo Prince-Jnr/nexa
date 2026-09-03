@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { CreditCard, Receipt, Zap, Check, MessageSquare, HardDrive, Microscope, Image } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,7 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import { PLANS } from '@/config';
-import { MOCK_USER, MOCK_USAGE } from '@/lib/mock/data';
+import { useAppStore } from '@/stores/app-store';
+import { useChatStore } from '@/stores/chat-store';
 import { formatBytes, cn } from '@/lib/utils';
 import type { Plan } from '@/types';
 
@@ -174,8 +176,30 @@ const MOCK_INVOICES = [
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function BillingPage() {
-  const user = MOCK_USER;
-  const usage = MOCK_USAGE;
+  const user = useAppStore((state) => state.user);
+  const conversations = useChatStore((state) => state.conversations);
+  const [researchUsed, setResearchUsed] = useState(0);
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      try {
+        const saved = localStorage.getItem(`nexa-research-${user?.id ?? 'signed-out'}`);
+        setResearchUsed(saved ? JSON.parse(saved).filter((job: { status: string }) => job.status === 'completed').length : 0);
+      } catch {
+        setResearchUsed(0);
+      }
+    });
+  }, [user]);
+
+  if (!user) return <p className="text-sm text-muted-foreground">Sign in to view your usage.</p>;
+
+  const planLimits = PLANS.find((plan) => plan.id === user.plan)?.limits ?? PLANS[0].limits;
+  const usage = {
+    messages: { used: conversations.reduce((total, conversation) => total + Math.floor(conversation.messageCount / 2), 0), limit: planLimits.messagesPerDay },
+    storage: { used: 0, limit: planLimits.storageGB },
+    research: { used: researchUsed, limit: planLimits.researchPerMonth },
+    imageGen: { used: 0, limit: planLimits.imageGenPerMonth },
+  };
 
   const currentPlan = PLANS.find((p) => p.id === user.plan) ?? PLANS[0];
   const planLabel = currentPlan.name;

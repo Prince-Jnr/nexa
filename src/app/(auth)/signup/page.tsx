@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { createAccount, signInWithGoogleEmail } from "@/lib/auth";
+import { createAccount } from "@/lib/auth";
 import { useAppStore } from "@/stores/app-store";
 import { useRouter } from "next/navigation";
 
@@ -101,15 +101,9 @@ export default function SignupPage() {
     }
   };
 
-  function handleGoogleEmail() {
+  function handleOAuth(provider: "google" | "github") {
     setError("");
-    if (!email.trim() || !email.toLowerCase().endsWith("@gmail.com")) {
-      setError("Enter your Gmail address first, then continue with Google.");
-      return;
-    }
-    const user = signInWithGoogleEmail(email);
-    setUser(user);
-    router.push("/app");
+    router.push(`/api/auth/${provider}`);
   }
 
   return (
@@ -279,7 +273,7 @@ export default function SignupPage() {
               variant="outline"
               size="lg"
               className="w-full gap-3"
-              onClick={handleGoogleEmail}
+              onClick={() => handleOAuth("google")}
             >
               <GoogleIcon />
               Continue with Google
@@ -289,7 +283,7 @@ export default function SignupPage() {
               variant="outline"
               size="lg"
               className="w-full gap-3"
-              onClick={() => console.log("GitHub sign-up")}
+              onClick={() => handleOAuth("github")}
             >
               <GitHubIcon />
               Continue with GitHub

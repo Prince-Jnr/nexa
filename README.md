@@ -16,6 +16,26 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## OAuth setup
+
+Google and GitHub sign-in use OAuth and require provider credentials in `.env.local`:
+
+```env
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+GITHUB_CLIENT_ID=your-github-client-id
+GITHUB_CLIENT_SECRET=your-github-client-secret
+```
+
+Add these callback URLs to each provider application:
+
+```text
+http://localhost:3000/api/auth/google/callback
+http://localhost:3000/api/auth/github/callback
+```
+
+The local development flow stores the returned profile and account session in the browser. Use a database and server-side session store before deploying to production.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

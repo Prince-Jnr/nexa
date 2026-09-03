@@ -27,7 +27,7 @@ import { cn, getGreeting, formatDate, truncate } from '@/lib/utils';
 import { QUICK_ACTIONS, NEXA_MODELS } from '@/config';
 import { useChatStore } from '@/stores/chat-store';
 import { useAppStore } from '@/stores/app-store';
-import { MOCK_PROJECTS, MOCK_USAGE } from '@/lib/mock/data';
+import { MOCK_PROJECTS } from '@/lib/mock/data';
 
 // ── Icon map for QUICK_ACTIONS ─────────────────────────────────────────────
 const ICON_MAP: Record<string, React.ElementType> = {
@@ -390,34 +390,51 @@ function ProjectsSection() {
 
 // ── Usage Overview ─────────────────────────────────────────────────────────
 function UsageOverview() {
-  const usage = MOCK_USAGE;
+  const conversations = useChatStore((state) => state.conversations);
+  const user = useAppStore((state) => state.user);
+  const [researchUsed, setResearchUsed] = React.useState(0);
+  const planLimits = user ? { messages: user.plan === 'free' ? 50 : user.plan === 'plus' ? 500 : user.plan === 'pro' ? 5000 : 99999, storage: user.plan === 'free' ? 2 : user.plan === 'plus' ? 10 : user.plan === 'pro' ? 50 : 500, research: user.plan === 'free' ? 5 : user.plan === 'plus' ? 10 : user.plan === 'pro' ? 50 : 500, imageGen: user.plan === 'free' ? 10 : user.plan === 'plus' ? 50 : user.plan === 'pro' ? 200 : 1000 } : { messages: 50, storage: 2, research: 5, imageGen: 10 };
+
+  React.useEffect(() => {
+    queueMicrotask(() => {
+      const userId = user?.id ?? 'signed-out';
+      try {
+        const saved = localStorage.getItem(`nexa-research-${userId}`);
+        setResearchUsed(saved ? JSON.parse(saved).filter((job: { status: string }) => job.status === 'completed').length : 0);
+      } catch {
+        setResearchUsed(0);
+      }
+    });
+  }, [user]);
+
+  const messageUsed = conversations.reduce((total, conversation) => total + Math.floor(conversation.messageCount / 2), 0);
 
   const stats = [
     {
       label: 'Messages',
-      used: usage.messages.used,
-      limit: usage.messages.limit,
+      used: messageUsed,
+      limit: planLimits.messages,
       format: (v: number) => v.toLocaleString(),
       unit: '',
     },
     {
       label: 'Storage',
-      used: usage.storage.used,
-      limit: usage.storage.limit,
+      used: 0,
+      limit: planLimits.storage,
       format: (v: number) => `${v} GB`,
       unit: 'GB',
     },
     {
       label: 'Research',
-      used: usage.research.used,
-      limit: usage.research.limit,
+      used: researchUsed,
+      limit: planLimits.research,
       format: (v: number) => v.toString(),
       unit: 'jobs',
     },
     {
       label: 'Image gen',
-      used: usage.imageGen.used,
-      limit: usage.imageGen.limit,
+      used: 0,
+      limit: planLimits.imageGen,
       format: (v: number) => v.toString(),
       unit: 'images',
     },

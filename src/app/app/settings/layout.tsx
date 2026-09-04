@@ -31,16 +31,16 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
   const sectionLabel = getSectionLabel(pathname);
 
   return (
-    <div className="flex h-full min-h-screen">
+    <div className="flex h-full min-h-screen min-w-0 flex-col md:flex-row">
       {/* Left navigation */}
-      <aside className="w-56 shrink-0 border-r border-border bg-background/50 flex flex-col">
+      <aside className="w-full shrink-0 border-b border-border bg-background/50 md:w-56 md:border-b-0 md:border-r">
         {/* Header */}
-        <div className="px-4 py-5 border-b border-border">
+        <div className="border-b border-border px-4 py-4 md:py-5">
           <h1 className="text-base font-semibold text-foreground">Settings</h1>
         </div>
 
         {/* Nav links */}
-        <nav className="flex-1 p-2 space-y-0.5">
+        <nav className="flex gap-1 overflow-x-auto p-2 md:flex-1 md:flex-col md:space-y-0.5">
           {SETTINGS_NAV.map((item) => {
             const isActive =
               item.href === '/app/settings'
@@ -53,7 +53,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                  'flex shrink-0 items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                   isActive
                     ? 'bg-nexa-violet/10 text-nexa-violet'
                     : 'text-muted-foreground hover:bg-accent hover:text-foreground'
@@ -73,16 +73,16 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-1.5 px-6 py-4 border-b border-border text-sm text-muted-foreground">
+        <div className="flex items-center gap-1.5 border-b border-border px-4 py-3 text-sm text-muted-foreground md:px-6 md:py-4">
           <span>Settings</span>
           <ChevronRight className="h-3.5 w-3.5" />
           <span className="text-foreground font-medium">{sectionLabel}</span>
         </div>
 
         {/* Page content */}
-        <main className="flex-1 overflow-auto p-6">
+        <main className="min-w-0 flex-1 overflow-auto p-4 md:p-6">
           {children}
         </main>
       </div>

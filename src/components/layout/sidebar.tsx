@@ -581,7 +581,7 @@ export function Sidebar() {
         {/* Drawer panel */}
         <aside
           className={cn(
-            "fixed inset-y-0 left-0 z-50 w-[260px] bg-sidebar-bg border-r border-sidebar-border",
+            "fixed inset-y-0 left-0 z-[60] w-[min(260px,calc(100vw-2rem))] bg-sidebar-bg border-r border-sidebar-border",
             "transition-transform duration-300 ease-in-out shadow-2xl",
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           )}
